@@ -1,1717 +1,295 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="CLICKFIX — Your World of Movies & Series. Discover movies, TV series and Korean dramas, watch official trailers and find legal streaming platforms."
-  />
-  <meta name="theme-color" content="#08080d" />
-  <title>CLICKFIX — Your World of Movies & Series</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLICKFIX - Movies & TV Series</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  />
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  <!-- Production: replace with your verified Google Analytics measurement ID -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  -->
+body {
+    background: #0b0b0d;
+    color: white;
+    font-family: Arial, sans-serif;
+}
 
-  <style>
-    :root {
-      --bg: #08080d;
-      --surface: #11111a;
-      --surface-2: #171722;
-      --surface-3: #202032;
-      --text: #f7f7fb;
-      --muted: #a7a7b8;
-      --line: rgba(255, 255, 255, 0.09);
-      --purple: #8a5cff;
-      --purple-bright: #a978ff;
-      --blue: #36a8ff;
-      --gradient: linear-gradient(135deg, #925cff, #297dff);
-      --radius: 18px;
-      --shadow: 0 20px 70px rgba(0, 0, 0, 0.45);
+/* HEADER */
+header {
+    background: #111;
+    padding: 20px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #292929;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff303c;
+}
+
+.logo span {
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #ff303c;
+}
+
+/* HERO */
+.hero {
+    padding: 80px 7%;
+    background: linear-gradient(90deg, #171717, #3a1117);
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #ff303c;
+}
+
+.hero p {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background: #ff303c;
+    border: none;
+    padding: 13px 25px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* SEARCH */
+.search-area {
+    padding: 30px 7%;
+}
+
+.search-area input {
+    width: 100%;
+    padding: 15px;
+    background: #1c1c1c;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+/* CONTENT */
+.section {
+    padding: 20px 7% 50px;
+}
+
+.section h2 {
+    margin-bottom: 25px;
+    border-left: 4px solid #ff303c;
+    padding-left: 12px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 22px;
+}
+
+.movie-card {
+    background: #171717;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: translateY(-6px);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.movie-info {
+    padding: 12px;
+}
+
+.movie-info h3 {
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.movie-info p {
+    font-size: 12px;
+    color: #999;
+}
+
+/* BUTTON */
+.download {
+    display: block;
+    background: #ff303c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 12px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    background: #111;
+    padding: 30px;
+    color: #777;
+    font-size: 13px;
+}
+
+@media(max-width:600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-width: 320px;
-      background:
-        radial-gradient(circle at 85% 0%, rgba(104, 61, 198, 0.16), transparent 32rem),
-        var(--bg);
-      color: var(--text);
-      font-family: "DM Sans", sans-serif;
-      line-height: 1.5;
-    }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .container {
-      width: min(1200px, calc(100% - 40px));
-      margin-inline: auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      background: rgba(8, 8, 13, 0.8);
-      backdrop-filter: blur(22px);
-    }
-
-    .header-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .brand-mark {
-      width: 35px;
-      height: 35px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: var(--gradient);
-      box-shadow: 0 0 28px rgba(123, 85, 255, 0.5);
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      font-size: 17px;
-    }
-
-    .brand-text {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 21px;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-    }
-
-    .brand-text span {
-      color: var(--purple-bright);
-    }
-
-    .main-nav {
-      display: flex;
-      align-items: center;
-      gap: 21px;
-      margin-left: auto;
-    }
-
-    .main-nav a {
-      color: #c5c5d1;
-      font-size: 14px;
-      transition: color 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: #fff;
-    }
-
-    .header-search {
-      width: 185px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .header-search input {
-      width: 100%;
-      border: 0;
-      outline: 0;
-      color: var(--text);
-      background: transparent;
-      font-size: 13px;
-    }
-
-    .header-search input::placeholder {
-      color: #89899a;
-    }
-
-    .menu-toggle {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      color: white;
-      background: var(--surface-2);
-      font-size: 20px;
-    }
-
-    .hero {
-      min-height: 560px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(8, 8, 13, 0.98) 0%, rgba(8, 8, 13, 0.78) 35%, rgba(8, 8, 13, 0.15) 78%),
-        linear-gradient(0deg, var(--bg) 0%, transparent 35%),
-        url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=2200&q=85")
-        center / cover;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 75% 45%, rgba(71, 89, 255, 0.18), transparent 28rem);
-      mix-blend-mode: screen;
-    }
-
-    .hero-content {
-      width: min(1200px, calc(100% - 40px));
-      margin-inline: auto;
-      position: relative;
-      z-index: 1;
-      padding: 75px 0 95px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 17px;
-      color: #cfc1ff;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 27px;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--purple-bright);
+    nav a {
+        margin: 0 8px;
     }
 
     .hero h1 {
-      max-width: 680px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(3rem, 7vw, 6.8rem);
-      line-height: 0.93;
-      letter-spacing: -0.065em;
-      text-transform: uppercase;
+        font-size: 34px;
     }
 
-    .hero-copy {
-      max-width: 560px;
-      margin: 24px 0;
-      color: #c1c1cd;
-      font-size: 16px;
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .hero-meta,
-    .card-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 9px;
-      color: #c5c5d0;
-      font-size: 13px;
-    }
-
-    .dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: #7e7e90;
-    }
-
-    .score {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: #ffd66c;
-      font-weight: 700;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 45px;
-      padding: 0 18px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .button-primary {
-      color: white;
-      background: var(--gradient);
-      box-shadow: 0 10px 30px rgba(102, 75, 255, 0.27);
-    }
-
-    .button-secondary {
-      color: white;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.09);
-    }
-
-    main {
-      padding-bottom: 70px;
-    }
-
-    .content-section {
-      padding-top: 58px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 19px;
-    }
-
-    .section-heading h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(21px, 3vw, 29px);
-      letter-spacing: -0.035em;
-    }
-
-    .section-heading p {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .view-all {
-      color: #b997ff;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .card-row {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .poster-card {
-      min-width: 0;
-      position: relative;
-      overflow: hidden;
-      border-radius: 13px;
-      background: var(--surface);
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .poster-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 17px 35px rgba(0, 0, 0, 0.36);
-    }
-
-    .poster-wrap {
-      position: relative;
-      aspect-ratio: 2 / 3;
-      overflow: hidden;
-      background: linear-gradient(135deg, #342059, #15263e);
-    }
-
-    .poster-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent 42%);
-      pointer-events: none;
-    }
-
-    .poster-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.45s ease;
-    }
-
-    .poster-card:hover img {
-      transform: scale(1.07);
-    }
-
-    .poster-type {
-      position: absolute;
-      top: 9px;
-      left: 9px;
-      z-index: 1;
-      padding: 4px 7px;
-      border-radius: 5px;
-      color: white;
-      background: rgba(8, 8, 13, 0.73);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .poster-score {
-      position: absolute;
-      right: 9px;
-      bottom: 9px;
-      z-index: 1;
-      padding: 4px 7px;
-      border-radius: 5px;
-      color: #ffe08a;
-      background: rgba(8, 8, 13, 0.76);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .card-info {
-      padding: 11px 10px 13px;
-    }
-
-    .card-title {
-      overflow: hidden;
-      margin-bottom: 3px;
-      font-size: 14px;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .card-subtitle {
-      overflow: hidden;
-      color: var(--muted);
-      font-size: 12px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .ad-slot {
-      min-height: 96px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 55px auto 0;
-      border: 1px dashed rgba(255, 255, 255, 0.17);
-      border-radius: 12px;
-      color: #77778a;
-      background: rgba(255, 255, 255, 0.025);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .ad-slot span {
-      padding: 5px 9px;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .discover-panel {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(145deg, rgba(27, 27, 42, 0.9), rgba(15, 15, 24, 0.9));
-    }
-
-    .filter-bar {
-      display: grid;
-      grid-template-columns: 2fr repeat(4, 1fr);
-      gap: 10px;
-    }
-
-    .field {
-      min-height: 43px;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.045);
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      border: 0;
-      outline: 0;
-      color: var(--text);
-      background: transparent;
-      font-size: 13px;
-    }
-
-    .field select option {
-      color: #111;
-    }
-
-    .discover-results {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .results-count {
-      margin-top: 17px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .empty-state {
-      grid-column: 1 / -1;
-      padding: 40px 20px;
-      border: 1px dashed var(--line);
-      border-radius: 12px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .footer {
-      margin-top: 45px;
-      padding: 55px 0 24px;
-      border-top: 1px solid var(--line);
-      background: #06060a;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.6fr repeat(3, 1fr);
-      gap: 35px;
-    }
-
-    .footer h3 {
-      margin-bottom: 14px;
-      font-size: 14px;
-    }
-
-    .footer p,
-    .footer a {
-      color: #9292a3;
-      font-size: 13px;
-    }
-
-    .footer p {
-      max-width: 290px;
-    }
-
-    .footer-links {
-      display: grid;
-      gap: 9px;
-    }
-
-    .footer a:hover {
-      color: white;
-    }
-
-    .copyright {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      margin-top: 45px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      color: #6d6d7e;
-      font-size: 12px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: none;
-      overflow-y: auto;
-      padding: 30px 15px;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal.is-open {
-      display: block;
-    }
-
-    .modal-dialog {
-      width: min(960px, 100%);
-      position: relative;
-      overflow: hidden;
-      margin: auto;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: #11111a;
-      box-shadow: var(--shadow);
-    }
-
-    .close-modal {
-      width: 38px;
-      height: 38px;
-      position: absolute;
-      z-index: 5;
-      top: 15px;
-      right: 15px;
-      border-radius: 50%;
-      color: white;
-      background: rgba(0, 0, 0, 0.55);
-      font-size: 22px;
-    }
-
-    .detail-backdrop {
-      min-height: 320px;
-      display: flex;
-      align-items: end;
-      position: relative;
-      padding: 35px;
-      background:
-        linear-gradient(0deg, #11111a 0%, transparent 78%),
-        linear-gradient(90deg, rgba(17, 17, 26, 0.85), transparent),
-        center / cover;
-    }
-
-    .detail-heading {
-      position: relative;
-      z-index: 1;
-    }
-
-    .detail-heading h2 {
-      max-width: 700px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(30px, 5vw, 54px);
-      line-height: 1;
-      letter-spacing: -0.05em;
-    }
-
-    .detail-body {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 30px;
-      padding: 0 35px 35px;
-    }
-
-    .detail-poster {
-      width: 100%;
-      margin-top: -90px;
-      position: relative;
-      z-index: 2;
-      border-radius: 12px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.42);
-    }
-
-    .detail-content {
-      padding-top: 5px;
-    }
-
-    .detail-description {
-      margin: 17px 0;
-      color: #c0c0cc;
-      font-size: 15px;
-    }
-
-    .detail-block {
-      margin-top: 25px;
-    }
-
-    .detail-block h3 {
-      margin-bottom: 10px;
-      font-size: 15px;
-    }
-
-    .cast-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .cast-list span {
-      padding: 7px 10px;
-      border-radius: 7px;
-      color: #c5c5d1;
-      background: var(--surface-3);
-      font-size: 12px;
-    }
-
-    .trailer-frame {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border: 0;
-      border-radius: 12px;
-      background: #07070a;
-    }
-
-    .trailer-empty {
-      min-height: 190px;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      border-radius: 12px;
-      color: var(--muted);
-      background: #08080d;
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .legal-modal-content {
-      padding: 38px;
-    }
-
-    .legal-modal-content h2 {
-      margin-bottom: 15px;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .legal-modal-content p {
-      margin-bottom: 14px;
-      color: #b7b7c5;
-      font-size: 14px;
-    }
-
-    @media (max-width: 1050px) {
-      .main-nav {
-        gap: 13px;
-      }
-
-      .main-nav a {
-        font-size: 12px;
-      }
-
-      .card-row,
-      .discover-results {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-
-      .filter-bar {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .filter-bar .field:first-child {
-        grid-column: 1 / -1;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .container,
-      .hero-content {
-        width: min(100% - 28px, 620px);
-      }
-
-      .header-inner {
-        min-height: 68px;
-      }
-
-      .menu-toggle {
-        display: block;
-        margin-left: auto;
-      }
-
-      .main-nav {
-        display: none;
-        width: 100%;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 10px 14px 16px;
-        border-bottom: 1px solid var(--line);
-        background: rgba(12, 12, 18, 0.98);
-      }
-
-      .main-nav.is-open {
-        display: flex;
-      }
-
-      .main-nav a {
-        padding: 12px 6px;
-        font-size: 14px;
-      }
-
-      .header-search {
-        display: none;
-      }
-
-      .hero {
-        min-height: 610px;
-        background:
-          linear-gradient(0deg, var(--bg) 4%, rgba(8, 8, 13, 0.27) 75%),
-          linear-gradient(90deg, rgba(8, 8, 13, 0.76), rgba(8, 8, 13, 0.15)),
-          url("https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1400&q=80")
-          center / cover;
-      }
-
-      .hero-content {
-        padding-top: 160px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3.1rem, 16vw, 5.5rem);
-      }
-
-      .card-row {
-        display: flex;
-        overflow-x: auto;
-        padding: 4px 2px 12px;
-        scrollbar-width: none;
-      }
-
-      .card-row::-webkit-scrollbar {
-        display: none;
-      }
-
-      .poster-card {
-        min-width: 145px;
-        width: 145px;
-      }
-
-      .filter-bar {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .filter-bar .field:first-child {
-        grid-column: 1 / -1;
-      }
-
-      .discover-results {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px 20px;
-      }
-
-      .footer-grid > div:first-child {
-        grid-column: 1 / -1;
-      }
-
-      .copyright {
-        flex-direction: column;
-        margin-top: 30px;
-      }
-
-      .detail-backdrop {
-        min-height: 250px;
-        padding: 22px;
-      }
-
-      .detail-body {
-        grid-template-columns: 1fr;
-        padding: 0 22px 25px;
-      }
-
-      .detail-poster {
-        width: 155px;
-        margin-top: -70px;
-      }
-
-      .detail-content {
-        padding-top: 0;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .brand-text {
-        font-size: 18px;
-      }
-
-      .filter-bar {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-bar .field:first-child {
-        grid-column: auto;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid > div:first-child {
-        grid-column: auto;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#home" aria-label="CLICKFIX home">
-        <span class="brand-mark">C</span>
-        <span class="brand-text">CLICK<span>FIX</span></span>
-      </a>
 
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <a href="#home" class="active">Home</a>
+<header>
+    <div class="logo">CLICK<span>FIX</span></div>
+
+    <nav>
+        <a href="#">Home</a>
         <a href="#movies">Movies</a>
         <a href="#series">TV Series</a>
-        <a href="#korean">Korean Dramas</a>
-        <a href="#discover">Genres</a>
-        <a href="#trending">Trending</a>
-        <a href="#about">About Us</a>
-      </nav>
+    </nav>
+</header>
 
-      <label class="header-search" aria-label="Search titles">
-        <span aria-hidden="true">⌕</span>
-        <input id="headerSearch" type="search" placeholder="Search titles..." />
-      </label>
+<section class="hero">
+    <h1>WELCOME TO <span>CLICKFIX</span></h1>
+    <p>Discover Movies and TV Series in one place.</p>
+    <button onclick="document.getElementById('movies').scrollIntoView({behavior:'smooth'})">
+        Explore Now
+    </button>
+</section>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
-        ☰
-      </button>
-    </div>
-  </header>
+<div class="search-area">
+    <input type="text" id="search"
+    placeholder="Search movies and TV series..."
+    oninput="searchMovies()">
+</div>
 
-  <main id="home">
-    <section class="hero" aria-label="Featured title">
-      <div class="hero-content">
-        <div class="eyebrow">Featured this week</div>
-        <h1>Dune:<br />Part Two</h1>
+<section class="section" id="movies">
+    <h2>Latest Movies</h2>
 
-        <div class="hero-meta">
-          <span>2024</span>
-          <span class="dot"></span>
-          <span>Movie</span>
-          <span class="dot"></span>
-          <span>Adventure · Sci-Fi</span>
-          <span class="score">★ 9.1 CLICKFIX</span>
-        </div>
+    <div class="movie-grid" id="movieGrid">
 
-        <p class="hero-copy">
-          Paul Atreides unites with Chani and the Fremen while seeking revenge against
-          the conspirators who destroyed his family.
-        </p>
-
-        <div class="hero-actions">
-          <button class="button button-primary" data-open="dune-2">View details</button>
-          <button class="button button-secondary" data-trailer="dune-2">▶ Watch trailer</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="container">
-      <section class="content-section" id="movies">
-        <div class="section-heading">
-          <div>
-            <h2>Featured Movies</h2>
-            <p>Big-screen stories worth discovering.</p>
-          </div>
-          <a href="#discover" class="view-all">View collection →</a>
-        </div>
-        <div class="card-row" id="featuredMovies"></div>
-      </section>
-
-      <div class="ad-slot" aria-label="Advertisement">
-        <span>Advertisement space</span>
-      </div>
-
-      <section class="content-section" id="series">
-        <div class="section-heading">
-          <div>
-            <h2>Popular TV Series</h2>
-            <p>Your next long-form obsession starts here.</p>
-          </div>
-          <a href="#discover" class="view-all">View collection →</a>
-        </div>
-        <div class="card-row" id="popularSeries"></div>
-      </section>
-
-      <section class="content-section" id="korean">
-        <div class="section-heading">
-          <div>
-            <h2>Korean Dramas</h2>
-            <p>Emotion, suspense and unforgettable characters.</p>
-          </div>
-          <a href="#discover" class="view-all">View collection →</a>
-        </div>
-        <div class="card-row" id="koreanDramas"></div>
-      </section>
-
-      <section class="content-section" id="trending">
-        <div class="section-heading">
-          <div>
-            <h2>Trending This Week</h2>
-            <p>What the CLICKFIX community is exploring now.</p>
-          </div>
-          <a href="#discover" class="view-all">Explore all →</a>
-        </div>
-        <div class="card-row" id="trendingTitles"></div>
-      </section>
-
-      <section class="content-section">
-        <div class="section-heading">
-          <div>
-            <h2>Recently Added</h2>
-            <p>Fresh additions to your watchlist.</p>
-          </div>
-        </div>
-        <div class="card-row" id="recentTitles"></div>
-      </section>
-
-      <section class="content-section">
-        <div class="section-heading">
-          <div>
-            <h2>Top Rated Movies</h2>
-            <p>Highly rated picks from our editorial catalog.</p>
-          </div>
-        </div>
-        <div class="card-row" id="topRated"></div>
-      </section>
-
-      <section class="content-section">
-        <div class="section-heading">
-          <div>
-            <h2>Upcoming Movies</h2>
-            <p>Keep an eye on what is coming next.</p>
-          </div>
-        </div>
-        <div class="card-row" id="upcoming"></div>
-      </section>
-
-      <section class="content-section" id="discover">
-        <div class="section-heading">
-          <div>
-            <h2>Discover Everything</h2>
-            <p>Search and refine the catalog by type, genre, country or year.</p>
-          </div>
-        </div>
-
-        <div class="discover-panel">
-          <div class="filter-bar">
-            <label class="field">
-              <span aria-hidden="true">⌕</span>
-              <input id="discoverSearch" type="search" placeholder="Search movies and series..." />
-            </label>
-
-            <label class="field">
-              <select id="typeFilter" aria-label="Filter by type">
-                <option value="">All types</option>
-                <option value="Movie">Movies</option>
-                <option value="TV Series">TV Series</option>
-                <option value="K-Drama">Korean Dramas</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <select id="genreFilter" aria-label="Filter by genre">
-                <option value="">All genres</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <select id="countryFilter" aria-label="Filter by country">
-                <option value="">All countries</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <select id="yearFilter" aria-label="Filter by release year">
-                <option value="">All years</option>
-              </select>
-            </label>
-
-            <label class="field">
-              <select id="sortFilter" aria-label="Sort results">
-                <option value="popularity">Sort: Popularity</option>
-                <option value="rating">Sort: CLICKFIX score</option>
-                <option value="year">Sort: Newest</option>
-                <option value="title">Sort: Title</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="results-count" id="resultsCount"></div>
-          <div class="discover-results" id="discoverResults"></div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="footer" id="about">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a class="brand" href="#home">
-            <span class="brand-mark">C</span>
-            <span class="brand-text">CLICK<span>FIX</span></span>
-          </a>
-          <p style="margin-top: 15px;">
-            Your World of Movies & Series. Discover titles, watch official trailers
-            and find authorized ways to watch.
-          </p>
-        </div>
-
-        <div>
-          <h3>Explore</h3>
-          <div class="footer-links">
-            <a href="#movies">Movies</a>
-            <a href="#series">TV Series</a>
-            <a href="#korean">Korean Dramas</a>
-            <a href="#trending">Trending</a>
-          </div>
-        </div>
-
-        <div>
-          <h3>Company</h3>
-          <div class="footer-links">
-            <a href="#" data-legal="about">About Us</a>
-            <a href="mailto:contact@clickfix.example">Contact</a>
-            <a href="#" data-legal="privacy">Privacy Policy</a>
-            <a href="#" data-legal="terms">Terms of Service</a>
-          </div>
-        </div>
-
-        <div>
-          <h3>Legal</h3>
-          <div class="footer-links">
-            <a href="#" data-legal="copyright">Copyright Policy</a>
-            <a href="#" data-legal="dmca">DMCA / Rights Contact</a>
-            <a href="#" data-legal="ads">Advertising Disclosure</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="copyright">
-        <span>© 2025 CLICKFIX. All rights reserved.</span>
-        <span>CLICKFIX does not host or distribute movies or TV episodes.</span>
-      </div>
-    </div>
-  </footer>
-
-  <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-    <div class="modal-dialog">
-      <button class="close-modal" data-close aria-label="Close details">×</button>
-
-      <div class="detail-backdrop" id="detailBackdrop">
-        <div class="detail-heading">
-          <div class="eyebrow" id="detailType">Title details</div>
-          <h2 id="detailTitle"></h2>
-        </div>
-      </div>
-
-      <div class="detail-body">
-        <img class="detail-poster" id="detailPoster" src="" alt="" />
-
-        <div class="detail-content">
-          <div class="hero-meta" id="detailMeta"></div>
-          <p class="detail-description" id="detailDescription"></p>
-
-          <div class="detail-block">
-            <h3>Cast & Crew</h3>
-            <div class="cast-list" id="detailCast"></div>
-          </div>
-
-          <div class="detail-block">
-            <h3>Official Trailer</h3>
-            <div id="detailTrailer"></div>
-          </div>
-
-          <div class="detail-block">
-            <h3>Where to Watch Legally</h3>
-            <a
-              id="watchLink"
-              class="button button-primary"
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Search authorized platforms
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="legalModal" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
-    <div class="modal-dialog">
-      <button class="close-modal" data-close aria-label="Close legal information">×</button>
-      <div class="legal-modal-content">
-        <h2 id="legalTitle"></h2>
-        <div id="legalBody"></div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const posterBase =
-      "https://images.unsplash.com/photo-";
-
-    const titles = [
-      {
-        id: "dune-2",
-        title: "Dune: Part Two",
-        type: "Movie",
-        year: 2024,
-        genres: ["Adventure", "Sci-Fi", "Drama"],
-        country: "United States",
-        score: 9.1,
-        popularity: 100,
-        tags: ["featured", "trending", "topRated"],
-        image: posterBase + "1536440136628-849c177e76a1?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
-        cast: ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson", "Denis Villeneuve — Director"],
-        trailer: "Way9Dexny3w"
-      },
-      {
-        id: "wild-robot",
-        title: "The Wild Robot",
-        type: "Movie",
-        year: 2024,
-        genres: ["Animation", "Adventure", "Family"],
-        country: "United States",
-        score: 8.8,
-        popularity: 94,
-        tags: ["featured", "recent", "topRated"],
-        image: posterBase + "1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "A shipwrecked robot learns to survive on an uninhabited island and forms an unexpected bond with the wildlife around her.",
-        cast: ["Lupita Nyong'o", "Pedro Pascal", "Kit Connor"],
-        trailer: null
-      },
-      {
-        id: "challengers",
-        title: "Challengers",
-        type: "Movie",
-        year: 2024,
-        genres: ["Drama", "Romance", "Sport"],
-        country: "United States",
-        score: 8.1,
-        popularity: 91,
-        tags: ["featured", "recent"],
-        image: posterBase + "1517604931442-7e0c8f7f8d8b?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1517604931442-7e0c8f7f8d8b?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "A former tennis prodigy turned coach enters her husband into a challenger event where he faces her former lover.",
-        cast: ["Zendaya", "Josh O'Connor", "Mike Faist"],
-        trailer: null
-      },
-      {
-        id: "past-lives",
-        title: "Past Lives",
-        type: "Movie",
-        year: 2023,
-        genres: ["Drama", "Romance"],
-        country: "United States",
-        score: 8.5,
-        popularity: 76,
-        tags: ["topRated"],
-        image: posterBase + "1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Two childhood friends reunite in New York decades after one family emigrates from South Korea.",
-        cast: ["Greta Lee", "Teo Yoo", "John Magaro", "Celine Song — Director"],
-        trailer: null
-      },
-      {
-        id: "oppenheimer",
-        title: "Oppenheimer",
-        type: "Movie",
-        year: 2023,
-        genres: ["Biography", "Drama", "History"],
-        country: "United States",
-        score: 9.0,
-        popularity: 96,
-        tags: ["trending", "topRated"],
-        image: posterBase + "1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "The story of J. Robert Oppenheimer and his role in developing the atomic bomb.",
-        cast: ["Cillian Murphy", "Emily Blunt", "Robert Downey Jr.", "Christopher Nolan — Director"],
-        trailer: null
-      },
-      {
-        id: "shogun",
-        title: "Shōgun",
-        type: "TV Series",
-        year: 2024,
-        genres: ["Drama", "History", "War"],
-        country: "Japan",
-        score: 9.3,
-        popularity: 98,
-        tags: ["series", "trending", "topRated"],
-        image: posterBase + "1518709268805-4e9042af9f23?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "An English pilot shipwrecked in Japan becomes caught in the conflict between powerful feudal lords.",
-        cast: ["Hiroyuki Sanada", "Anna Sawai", "Cosmo Jarvis"],
-        trailer: null
-      },
-      {
-        id: "the-bear",
-        title: "The Bear",
-        type: "TV Series",
-        year: 2022,
-        genres: ["Comedy", "Drama"],
-        country: "United States",
-        score: 8.9,
-        popularity: 90,
-        tags: ["series", "trending"],
-        image: posterBase + "1493246507139-91e8fad9978e?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "A young chef returns to Chicago to run his family's sandwich shop after a devastating loss.",
-        cast: ["Jeremy Allen White", "Ayo Edebiri", "Ebon Moss-Bachrach"],
-        trailer: null
-      },
-      {
-        id: "arcane",
-        title: "Arcane",
-        type: "TV Series",
-        year: 2021,
-        genres: ["Animation", "Action", "Fantasy"],
-        country: "France",
-        score: 9.0,
-        popularity: 93,
-        tags: ["series", "recent", "topRated"],
-        image: posterBase + "1518837695005-2083093ee35b?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Two sisters find themselves on rival sides of a conflict between the wealthy city of Piltover and the underground Zaun.",
-        cast: ["Ella Purnell", "Hailee Steinfeld", "Katie Leung"],
-        trailer: null
-      },
-      {
-        id: "moving",
-        title: "Moving",
-        type: "K-Drama",
-        year: 2023,
-        genres: ["Action", "Fantasy", "Drama"],
-        country: "South Korea",
-        score: 9.1,
-        popularity: 89,
-        tags: ["korean", "trending", "topRated"],
-        image: posterBase + "1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Teenagers with extraordinary abilities and their parents confront dangerous forces from the past.",
-        cast: ["Ryu Seung-ryong", "Han Hyo-joo", "Zo In-sung"],
-        trailer: null
-      },
-      {
-        id: "my-demon",
-        title: "My Demon",
-        type: "K-Drama",
-        year: 2023,
-        genres: ["Romance", "Fantasy", "Comedy"],
-        country: "South Korea",
-        score: 8.0,
-        popularity: 82,
-        tags: ["korean", "recent"],
-        image: posterBase + "1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "A powerful heiress and a demon lose their abilities and become entangled in an unexpected relationship.
-          Download from this - <a href="https://ravijamudalpath69-art.github.io/tvseries/" target="download">Open in new tab</a>,
-        cast: ["Kim Yoo-jung", "Song Kang", "Lee Sang-yi"],
-        trailer: null
-      },
-      {
-        id: "last-of-us",
-        title: "The Last of Us",
-        type: "TV Series",
-        year: 2023,
-        genres: ["Drama", "Action", "Post-apocalyptic"],
-        country: "United States",
-        score: 8.8,
-        popularity: 88,
-        tags: ["series", "trending"],
-        image: posterBase + "1469474968028-56623f02e42e?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "A hardened survivor escorts a teenage girl across a dangerous post-pandemic United States.",
-        cast: ["Pedro Pascal", "Bella Ramsey", "Anna Torv"],
-        trailer: null
-      },
-      {
-        id: "severance",
-        title: "Severance",
-        type: "TV Series",
-        year: 2022,
-        genres: ["Mystery", "Drama", "Sci-Fi"],
-        country: "United States",
-        score: 8.7,
-        popularity: 84,
-        tags: ["series", "topRated"],
-        image: posterBase + "1535016120720-40c646be5580?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Employees at a mysterious company undergo a procedure that separates their work memories from their personal lives.",
-        cast: ["Adam Scott", "Britt Lower", "Patricia Arquette"],
-        trailer: null
-      },
-      {
-        id: "interstellar",
-        title: "Interstellar",
-        type: "Movie",
-        year: 2014,
-        genres: ["Adventure", "Drama", "Sci-Fi"],
-        country: "United States",
-        score: 9.2,
-        popularity: 87,
-        tags: ["topRated"],
-        image: posterBase + "1534447677768-be436bb09401?auto=format&fit=crop&w=700&q=80",
-        backdrop: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1800&q=85",
-        description:
-          "Explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-        cast: ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain", "Christopher Nolan — Director"],
-        trailer: null
-      }
-    ];
-
-    const $ = (selector) => document.querySelector(selector);
-
-    function cardTemplate(item) {
-      return `
-        <article class="poster-card" data-open="${item.id}" tabindex="0" role="button" aria-label="View ${item.title}">
-          <div class="poster-wrap">
-            <img src="${item.image}" alt="${item.title} poster artwork" loading="lazy" />
-            <span class="poster-type">${item.type}</span>
-            <span class="poster-score">★ ${item.score}</span>
-          </div>
-          <div class="card-info">
-            <div class="card-title">${item.title}</div>
-            <div class="card-subtitle">${item.year} · ${item.genres.slice(0, 2).join(" · ")}</div>
-          </div>
-        </article>
-      `;
-    }
-
-    function renderRow(elementId, list) {
-      const element = $("#" + elementId);
-      element.innerHTML = list.map(cardTemplate).join("");
-    }
-
-    renderRow("featuredMovies", titles.filter(item => item.tags.includes("featured")));
-    renderRow("popularSeries", titles.filter(item => item.type === "TV Series"));
-    renderRow("koreanDramas", titles.filter(item => item.type === "K-Drama"));
-    renderRow("trendingTitles", titles.filter(item => item.tags.includes("trending")));
-    renderRow("recentTitles", titles.filter(item => item.tags.includes("recent")));
-    renderRow("topRated", titles.filter(item => item.tags.includes("topRated")));
-    renderRow("upcoming", [
-      {
-        ...titles[1],
-        id: "upcoming-demo",
-        title: "Upcoming Spotlight",
-        year: 2025,
-        type: "Movie",
-        genres: ["Adventure", "Drama"],
-        image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",
-        description: "Upcoming title information will appear here once verified release metadata is available."
-      },
-      titles[2],
-      titles[8]
-    ]);
-
-    const allGenres = [...new Set(titles.flatMap(item => item.genres))].sort();
-    const allCountries = [...new Set(titles.map(item => item.country))].sort();
-    const allYears = [...new Set(titles.map(item => item.year))].sort((a, b) => b - a);
-
-    allGenres.forEach(genre => {
-      $("#genreFilter").insertAdjacentHTML("beforeend", `<option value="${genre}">${genre}</option>`);
-    });
-
-    allCountries.forEach(country => {
-      $("#countryFilter").insertAdjacentHTML("beforeend", `<option value="${country}">${country}</option>`);
-    });
-
-    allYears.forEach(year => {
-      $("#yearFilter").insertAdjacentHTML("beforeend", `<option value="${year}">${year}</option>`);
-    });
-
-    function getFilteredTitles() {
-      const query = $("#discoverSearch").value.trim().toLowerCase();
-      const type = $("#typeFilter").value;
-      const genre = $("#genreFilter").value;
-      const country = $("#countryFilter").value;
-      const year = $("#yearFilter").value;
-      const sort = $("#sortFilter").value;
-
-      const result = titles.filter(item => {
-        const searchable = [
-          item.title,
-          item.type,
-          item.country,
-          ...item.genres
-        ].join(" ").toLowerCase();
-
-        return (
-          (!query || searchable.includes(query)) &&
-          (!type || item.type === type) &&
-          (!genre || item.genres.includes(genre)) &&
-          (!country || item.country === country) &&
-          (!year || String(item.year) === year)
-        );
-      });
-
-      result.sort((a, b) => {
-        if (sort === "rating") return b.score - a.score;
-        if (sort === "year") return b.year - a.year;
-        if (sort === "title") return a.title.localeCompare(b.title);
-        return b.popularity - a.popularity;
-      });
-
-      return result;
-    }
-
-    function renderDiscover() {
-      const result = getFilteredTitles();
-      $("#resultsCount").textContent =
-        `${result.length} title${result.length === 1 ? "" : "s"} found`;
-
-      $("#discoverResults").innerHTML = result.length
-        ? result.map(cardTemplate).join("")
-        : `<div class="empty-state">No titles match your filters. Try a different search.</div>`;
-    }
-
-    ["discoverSearch", "typeFilter", "genreFilter", "countryFilter", "yearFilter", "sortFilter"]
-      .forEach(id => {
-        $("#" + id).addEventListener("input", renderDiscover);
-        $("#" + id).addEventListener("change", renderDiscover);
-      });
-
-    $("#headerSearch").addEventListener("input", event => {
-      $("#discoverSearch").value = event.target.value;
-      renderDiscover();
-      document.querySelector("#discover").scrollIntoView({ behavior: "smooth" });
-    });
-
-    renderDiscover();
-
-    function openDetails(id, showTrailer = false) {
-      const item = titles.find(title => title.id === id) || titles[1];
-      if (!item) return;
-
-      $("#detailTitle").textContent = item.title;
-      $("#detailType").textContent = `${item.type} details`;
-      $("#detailPoster").src = item.image;
-      $("#detailPoster").alt = `${item.title} poster artwork`;
-      $("#detailBackdrop").style.backgroundImage = `
-        linear-gradient(0deg, #11111a 0%, transparent 78%),
-        linear-gradient(90deg, rgba(17, 17, 26, 0.85), transparent),
-        url("${item.backdrop || item.image}")
-      `;
-
-      $("#detailMeta").innerHTML = `
-        <span>${item.year}</span>
-        <span class="dot"></span>
-        <span>${item.type}</span>
-        <span class="dot"></span>
-        <span>${item.genres.join(" · ")}</span>
-        <span class="score">★ ${item.score} CLICKFIX</span>
-      `;
-
-      $("#detailDescription").textContent = item.description;
-      $("#detailCast").innerHTML = item.cast.map(person => `<span>${person}</span>`).join("");
-
-      const trailerSearch =
-        `https://www.youtube.com/results?search_query=${encodeURIComponent(item.title + " official trailer")}`;
-
-      if (item.trailer) {
-        $("#detailTrailer").innerHTML = `
-          <iframe
-            class="trailer-frame"
-            src="https://www.youtube-nocookie.com/embed/${item.trailer}"
-            title="${item.title} official trailer"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        `;
-      } else {
-        $("#detailTrailer").innerHTML = `
-          <div class="trailer-empty">
-            <div>
-              <p>Official trailer source will be connected from the authorized content database.</p>
-              <a class="button button-secondary" style="margin-top:14px" href="${trailerSearch}" target="_blank" rel="noopener noreferrer">
-                Find official trailer
-              </a>
+        <div class="movie-card">
+            <img src="https://placehold.co/400x600/222/fff?text=Movie+1">
+            <div class="movie-info">
+                <h3>Movie Title 1</h3>
+                <p>2026 | Action</p>
+                <a href="YOUR-LEGAL-DOWNLOAD-LINK"
+                class="download">Download</a>
             </div>
-          </div>
-        `;
-      }
+        </div>
 
-      $("#watchLink").href =
-        `https://www.justwatch.com/us/search?q=${encodeURIComponent(item.title)}`;
+        <div class="movie-card">
+            <img src="https://placehold.co/400x600/222/fff?text=Movie+2">
+            <div class="movie-info">
+                <h3>Movie Title 2</h3>
+                <p>2026 | Adventure</p>
+                <a href="YOUR-LEGAL-DOWNLOAD-LINK"
+                class="download">Download</a>
+            </div>
+        </div>
 
-      $("#detailModal").classList.add("is-open");
-      document.body.classList.add("modal-open");
+        <div class="movie-card">
+            <img src="https://placehold.co/400x600/222/fff?text=Movie+3">
+            <div class="movie-info">
+                <h3>Movie Title 3</h3>
+                <p>2025 | Drama</p>
+                <a href="YOUR-LEGAL-DOWNLOAD-LINK"
+                class="download">Download</a>
+            </div>
+        </div>
 
-      if (showTrailer) {
-        setTimeout(() => {
-          $("#detailTrailer").scrollIntoView({ behavior: "smooth", block: "center" });
-        }, 100);
-      }
-    }
+    </div>
+</section>
 
-    document.addEventListener("click", event => {
-      const detailTarget = event.target.closest("[data-open]");
-      const trailerTarget = event.target.closest("[data-trailer]");
+<section class="section" id="series">
+    <h2>Latest TV Series</h2>
 
-      if (detailTarget) openDetails(detailTarget.dataset.open);
-      if (trailerTarget) openDetails(trailerTarget.dataset.trailer, true);
+    <div class="movie-grid">
+        <div class="movie-card">
+            <img src="https://placehold.co/400x600/222/fff?text=Series+1">
+            <div class="movie-info">
+                <h3>Series Title 1</h3>
+                <p>2026 | TV Series</p>
+                <a href="YOUR-LEGAL-DOWNLOAD-LINK"
+                class="download">View Episodes</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-      if (event.target.matches("[data-close]") || event.target === $("#detailModal") || event.target === $("#legalModal")) {
-        closeModals();
-      }
+<footer>
+    <h3>CLICKFIX</h3>
+    <p>Movies & TV Series</p>
+    <br>
+    <p>© 2026 CLICKFIX. All Rights Reserved.</p>
+</footer>
+
+<script>
+function searchMovies() {
+    let input = document.getElementById("search")
+        .value.toLowerCase();
+
+    let cards = document.querySelectorAll(".movie-card");
+
+    cards.forEach(card => {
+        let title = card.querySelector("h3")
+            .textContent.toLowerCase();
+
+        card.style.display =
+            title.includes(input) ? "" : "none";
     });
+}
+</script>
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeModals();
-
-      if (event.key === "Enter" && document.activeElement?.matches(".poster-card")) {
-        openDetails(document.activeElement.dataset.open);
-      }
-    });
-
-    function closeModals() {
-      document.querySelectorAll(".modal").forEach(modal => modal.classList.remove("is-open"));
-      document.body.classList.remove("modal-open");
-      $("#detailTrailer").innerHTML = "";
-    }
-
-    $("#menuToggle").addEventListener("click", () => {
-      const nav = $("#mainNav");
-      const isOpen = nav.classList.toggle("is-open");
-      $("#menuToggle").setAttribute("aria-expanded", String(isOpen));
-      $("#menuToggle").textContent = isOpen ? "×" : "☰";
-    });
-
-    document.querySelectorAll(".main-nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        $("#mainNav").classList.remove("is-open");
-        $("#menuToggle").setAttribute("aria-expanded", "false");
-        $("#menuToggle").textContent = "☰";
-      });
-    });
-
-    const legalContent = {
-      about: {
-        title: "About CLICKFIX",
-        body: `
-          <p>CLICKFIX is a movie and TV discovery platform focused on helping visitors find information, official trailers and authorized viewing options.</p>
-          <p>CLICKFIX does not host, stream, upload or distribute copyrighted movies or television episodes.</p>
-        `
-      },
-      privacy: {
-        title: "Privacy Policy",
-        body: `
-          <p>This demo uses no account system and does not collect personal information through the interface.</p>
-          <p>A production deployment should document analytics, cookies, contact form processing, advertising providers, retention periods and user rights.</p>
-        `
-      },
-      terms: {
-        title: "Terms of Service",
-        body: `
-          <p>CLICKFIX provides entertainment discovery information for personal, lawful use.</p>
-          <p>Users must not use the service to locate unauthorized downloads, streams or copyright-infringing material.</p>
-        `
-      },
-      copyright: {
-        title: "Copyright Policy",
-        body: `
-          <p>Movie artwork, trailers, names and metadata belong to their respective rights holders. Production assets must be licensed or used under an applicable legal permission.</p>
-          <p>To report a copyright concern, contact the rights team using the DMCA contact details below.</p>
-        `
-      },
-      dmca: {
-        title: "DMCA / Rights Contact",
-        body: `
-          <p>For copyright complaints, asset licensing questions or rights-management requests, contact: <a href="mailto:copyright@clickfix.example">copyright@clickfix.example</a></p>
-          <p>Include the relevant URL, a description of the claimed work and proof of authorization or ownership.</p>
-        `
-      },
-      ads: {
-        title: "Advertising Disclosure",
-        body: `
-          <p>CLICKFIX may display clearly labeled advertising, sponsorships and affiliate links.</p>
-          <p>Advertising will remain visually separated from editorial content. Affiliate relationships will not guarantee placement or rating.</p>
-        `
-      }
-    };
-
-    document.querySelectorAll("[data-legal]").forEach(link => {
-      link.addEventListener("click", event => {
-        event.preventDefault();
-        const content = legalContent[link.dataset.legal];
-
-        $("#legalTitle").textContent = content.title;
-        $("#legalBody").innerHTML = content.body;
-        $("#legalModal").classList.add("is-open");
-        document.body.classList.add("modal-open");
-      });
-    });
-  </script>
 </body>
 </html>
+
